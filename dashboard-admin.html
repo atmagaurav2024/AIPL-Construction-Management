@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard 1 | Atmagaurav Infra Pvt Ltd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <main class="dashboard-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Atmagaurav Infra Pvt Ltd</p>
+          <h1>Dashboard 1 (Admin)</h1>
+          <p class="sub">The Signature of Strength in National Infrastructure</p>
+        </div>
+        <div class="top-actions">
+          <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="all-menus-panel">☰ Menus</button>
+          <a class="logout-link" href="index.html">Logout</a>
+        </div>
+      </header>
+
+      <section id="all-menus-panel" class="all-menus-panel" hidden>
+        <h2>All Menus</h2>
+        <div class="all-menus-grid">
+          <button type="button">Projects</button>
+          <button type="button">Subcontractor</button>
+          <button type="button">Vendors</button>
+          <button type="button">Material</button>
+          <button type="button">Attendance</button>
+          <button type="button">BOQ Registration</button>
+          <button type="button">Item Breakup</button>
+          <button type="button">Work Progress</button>
+          <button type="button">Material Requisition</button>
+          <button type="button">PO &amp; GRN</button>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="Key summary cards">
+        <article class="summary-card">
+          <h2>Active Projects</h2>
+          <p class="value">12</p>
+        </article>
+        <article class="summary-card">
+          <h2>Pending Payments</h2>
+          <p class="value">8</p>
+        </article>
+        <article class="summary-card">
+          <h2>Today's Attendance</h2>
+          <p class="value">87%</p>
+        </article>
+      </section>
+
+      <section class="attendance-section" aria-label="Punch in and punch out">
+        <h2 class="section-title">Attendance Punch</h2>
+        <article class="attendance-card">
+          <div>
+            <p class="status-label">Current status</p>
+            <p class="status-value" id="punch-status">Not punched in</p>
+            <p class="meta-text" id="punch-meta">Tap Punch In to mark attendance with date, time, and location.</p>
+          </div>
+          <button class="punch-button is-in" id="punch-toggle" type="button">Punch In</button>
+        </article>
+
+        <article class="log-card" aria-live="polite">
+          <h3>Attendance Log (Today)</h3>
+          <ul id="attendance-log" class="attendance-log"></ul>
+        </article>
+      </section>
+
+      <section>
+        <h2 class="section-title">Core Modules</h2>
+        <div class="module-grid">
+          <article class="module-card"><h3>Project Tracker</h3><p>Manage project master details, dates, and files.</p></article>
+          <article class="module-card"><h3>Payments</h3><p>Track client billing, receivables, and payouts.</p></article>
+          <article class="module-card"><h3>Attendance</h3><p>Record employee/subcontractor daily attendance.</p></article>
+          <article class="module-card"><h3>Purchase Process</h3><p>Create requests, approvals, and purchase tracking.</p></article>
+          <article class="module-card"><h3>Subcontractor Work</h3><p>Assign work packages and monitor progress.</p></article>
+          <article class="module-card"><h3>Vendor Details</h3><p>Store vendor profiles, contacts, and payment history.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary">
+      <button class="tab-btn active" type="button">
+        <span class="tab-icon" aria-hidden="true">📁</span>
+        <span class="tab-label">Projects</span>
+      </button>
+      <button class="tab-btn" type="button">
+        <span class="tab-icon" aria-hidden="true">👷</span>
+        <span class="tab-label">Subcon</span>
+      </button>
+      <button class="tab-btn" type="button">
+        <span class="tab-icon" aria-hidden="true">🏢</span>
+        <span class="tab-label">Vendors</span>
+      </button>
+      <button class="tab-btn" type="button">
+        <span class="tab-icon" aria-hidden="true">🧱</span>
+        <span class="tab-label">Material</span>
+      </button>
+      <button class="tab-btn" type="button" id="bottom-more">
+        <span class="tab-icon" aria-hidden="true">⋯</span>
+        <span class="tab-label">More</span>
+      </button>
+    </nav>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
