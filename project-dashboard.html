@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Dashboard | Atmagaurav Infra Pvt Ltd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="project.css" />
+  </head>
+  <body>
+    <main class="project-shell">
+      <header class="project-header">
+        <a href="dashboard-admin.html" class="back-link">← Admin</a>
+        <h1 id="project-name">Project Dashboard</h1>
+      </header>
+
+      <section class="punch-panel">
+        <p class="clock-label">Current Time</p>
+        <p class="live-time" id="live-time">--:--:--</p>
+        <p class="date-line" id="live-date">--/--/----</p>
+        <p class="coords" id="live-coords">Location: Fetching...</p>
+        <button class="punch-btn is-in" id="project-punch" type="button">Punch In</button>
+        <p class="punch-status" id="project-punch-status">Not punched in</p>
+      </section>
+
+      <section class="kpi-grid">
+        <article><h2>Work Progress</h2><p>54%</p></article>
+        <article><h2>Pending BOQ Items</h2><p>22</p></article>
+        <article><h2>Material Requisitions</h2><p>9</p></article>
+      </section>
+
+      <section>
+        <h2 class="section-title">Project Menus</h2>
+        <div class="menu-grid">
+          <button type="button">BOQ Registration</button>
+          <button type="button">Item Breakup</button>
+          <button type="button">Work Progress</button>
+          <button type="button">Material Requisition</button>
+          <button type="button">PO &amp; Vendor Assignment</button>
+          <button type="button">GRN &amp; Stock</button>
+        </div>
+      </section>
+    </main>
+    <script src="project.js"></script>
+  </body>
+</html>
