@@ -121,6 +121,21 @@ button:hover {
   filter: brightness(1.04);
 }
 
+.forgot-toggle {
+  margin-top: 14px;
+  border: none;
+  background: transparent;
+  color: #334155;
+  padding: 0;
+  text-align: left;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.forgot-toggle:hover {
+  color: #1d4ed8;
+}
+
 .reset-password {
   margin-top: 18px;
   border-top: 1px solid #e5e7eb;

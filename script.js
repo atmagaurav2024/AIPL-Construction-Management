@@ -1,4 +1,6 @@
 const form = document.getElementById('login-form');
+const forgotToggle = document.getElementById('forgot-toggle');
+const resetPanel = document.getElementById('reset-password-panel');
 const resetButton = document.getElementById('send-reset-link');
 const resetEmailInput = document.getElementById('reset-email');
 
@@ -13,6 +15,19 @@ form?.addEventListener('submit', (event) => {
   }
 
   window.location.href = 'dashboard-admin.html';
+});
+
+forgotToggle?.addEventListener('click', () => {
+  const isHidden = resetPanel?.hasAttribute('hidden');
+  if (!resetPanel) return;
+
+  if (isHidden) {
+    resetPanel.removeAttribute('hidden');
+    forgotToggle.setAttribute('aria-expanded', 'true');
+  } else {
+    resetPanel.setAttribute('hidden', '');
+    forgotToggle.setAttribute('aria-expanded', 'false');
+  }
 });
 
 resetButton?.addEventListener('click', () => {

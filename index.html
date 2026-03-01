@@ -47,8 +47,11 @@
           <button class="primary-btn" type="submit">Login to Dashboard</button>
         </form>
 
-        <div class="reset-password" aria-live="polite">
-          <p>Forgot your password?</p>
+        <button id="forgot-toggle" class="forgot-toggle" type="button" aria-expanded="false" aria-controls="reset-password-panel">
+          Forgot your password?
+        </button>
+
+        <div class="reset-password" id="reset-password-panel" aria-live="polite" hidden>
           <label for="reset-email">Reset link sent to email</label>
           <div class="reset-controls">
             <input id="reset-email" type="email" placeholder="Enter your registered email" />

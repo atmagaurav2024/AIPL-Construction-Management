@@ -19,10 +19,10 @@
         <button id="close-menu" type="button">✕</button>
       </div>
       <nav class="side-menu-list">
-        <a href="#">Projects</a>
-        <a href="#">Subcontractor Registration</a>
-        <a href="#">Vendor Registration</a>
-        <a href="#">Material Registration</a>
+        <a href="#" id="menu-projects">Projects</a>
+        <a href="#">Subcontractor</a>
+        <a href="#">Vendors</a>
+        <a href="#">Material</a>
         <a href="#">Reports</a>
         <a class="logout-item" href="index.html">Logout</a>
       </nav>
@@ -87,13 +87,13 @@
         </div>
       </section>
 
-      <section>
+      <section id="projects-section">
         <div class="projects-toolbar">
           <div class="toolbar-left">
             <button class="toolbar-btn" type="button">All ▾</button>
             <button class="toolbar-btn" type="button" id="search-toggle">🔎</button>
           </div>
-          <button id="add-project" type="button" class="add-project">+ Project</button>
+          <button id="add-project" type="button" class="add-project">Create Project</button>
         </div>
 
         <div class="search-wrap" id="search-wrap">
@@ -117,6 +117,39 @@
         </div>
       </section>
     </main>
+
+    <nav class="bottom-nav" aria-label="Quick actions">
+      <button type="button"><span>👷</span><small>Subcon</small></button>
+      <button type="button"><span>🏢</span><small>Vendors</small></button>
+      <button type="button"><span>🧱</span><small>Material</small></button>
+      <button type="button"><span>📊</span><small>Reports</small></button>
+    </nav>
+
+    <dialog id="project-modal" class="project-modal">
+      <form id="create-project-form" class="project-form" method="dialog">
+        <div class="modal-head">
+          <h2>Create Project</h2>
+          <button type="button" id="close-project-modal">✕</button>
+        </div>
+
+        <label>Project Name <input id="project-name-input" required /></label>
+        <label>Client Name <input id="client-name-input" required /></label>
+        <label>Cost Put to Tender <input id="cost-tender-input" type="number" min="0" step="0.01" required /></label>
+        <label>Contract Price <input id="contract-price-input" type="number" min="0" step="0.01" required /></label>
+        <label>% above / Below (auto)
+          <input id="percent-above-below" readonly placeholder="Auto calculated" />
+        </label>
+        <label>Work Order Date <input id="work-order-date" type="date" required /></label>
+        <label>Schedule Completion Date <input id="schedule-date" type="date" required /></label>
+        <label>EOT Date <input id="eot-date" type="date" /></label>
+        <label>DLP Date <input id="dlp-date" type="date" /></label>
+        <label>Construction Period (auto)
+          <input id="construction-period" readonly placeholder="Auto calculated" />
+        </label>
+
+        <button class="save-project" type="submit">Save Project</button>
+      </form>
+    </dialog>
 
     <script src="dashboard.js"></script>
   </body>

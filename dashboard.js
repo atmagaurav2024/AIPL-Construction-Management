@@ -10,6 +10,20 @@ const searchToggle = document.getElementById('search-toggle');
 const searchWrap = document.getElementById('search-wrap');
 const addKpiButton = document.getElementById('add-kpi');
 const summaryGrid = document.getElementById('summary-grid');
+const menuProjects = document.getElementById('menu-projects');
+const projectsSection = document.getElementById('projects-section');
+
+const projectModal = document.getElementById('project-modal');
+const closeProjectModal = document.getElementById('close-project-modal');
+const createProjectForm = document.getElementById('create-project-form');
+const projectNameInput = document.getElementById('project-name-input');
+const clientNameInput = document.getElementById('client-name-input');
+const costTenderInput = document.getElementById('cost-tender-input');
+const contractPriceInput = document.getElementById('contract-price-input');
+const percentAboveBelow = document.getElementById('percent-above-below');
+const workOrderDate = document.getElementById('work-order-date');
+const scheduleDate = document.getElementById('schedule-date');
+const constructionPeriod = document.getElementById('construction-period');
 
 const openMenu = () => {
   sideMenu?.classList.add('open');
@@ -28,6 +42,33 @@ const hideMenu = () => {
 const updateStamp = () => {
   const now = new Date();
   updatedStamp.textContent = `Updated: ${now.toLocaleDateString('en-IN')} ${now.toLocaleTimeString('en-IN')}`;
+};
+
+const calculatePercent = () => {
+  const cost = Number(costTenderInput?.value || 0);
+  const contract = Number(contractPriceInput?.value || 0);
+
+  if (!cost || !contract) {
+    percentAboveBelow.value = '';
+    return;
+  }
+
+  const pct = (contract / cost) * 100;
+  const relation = pct > 100 ? 'Above' : pct < 100 ? 'Below' : 'At Par';
+  percentAboveBelow.value = `${pct.toFixed(2)}% (${relation})`;
+};
+
+const calculateConstructionPeriod = () => {
+  const start = workOrderDate?.value ? new Date(workOrderDate.value) : null;
+  const end = scheduleDate?.value ? new Date(scheduleDate.value) : null;
+
+  if (!start || !end || Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    constructionPeriod.value = '';
+    return;
+  }
+
+  const diffDays = Math.round((end - start) / (1000 * 60 * 60 * 24));
+  constructionPeriod.value = diffDays >= 0 ? `${diffDays} days` : 'Invalid dates';
 };
 
 const wireKpiActions = (card) => {
@@ -89,6 +130,14 @@ addKpiButton?.addEventListener('click', () => {
 menuToggle?.addEventListener('click', openMenu);
 closeMenu?.addEventListener('click', hideMenu);
 menuBackdrop?.addEventListener('click', hideMenu);
+
+menuProjects?.addEventListener('click', (event) => {
+  event.preventDefault();
+  projectsSection?.removeAttribute('hidden');
+  hideMenu();
+  projectsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
 searchToggle?.addEventListener('click', () => {
   searchWrap.hidden = !searchWrap.hidden;
 });
@@ -104,16 +153,34 @@ searchInput?.addEventListener('input', () => {
 });
 
 addProjectButton?.addEventListener('click', () => {
-  const name = window.prompt('Enter new project name');
-  if (!name) return;
+  projectModal?.showModal();
+});
 
-  const city = window.prompt('Enter city/location', 'Maharashtra') || 'Maharashtra';
+closeProjectModal?.addEventListener('click', () => {
+  projectModal?.close();
+});
+
+[costTenderInput, contractPriceInput].forEach((el) => el?.addEventListener('input', calculatePercent));
+[workOrderDate, scheduleDate].forEach((el) => el?.addEventListener('change', calculateConstructionPeriod));
+
+createProjectForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const projectName = projectNameInput.value.trim();
+  const clientName = clientNameInput.value.trim();
+  if (!projectName || !clientName) return;
+
   const card = document.createElement('a');
-  const encoded = encodeURIComponent(name);
+  const encoded = encodeURIComponent(projectName);
   card.className = 'project-card';
   card.href = `project-dashboard.html?project=${encoded}`;
-  card.innerHTML = `<h3>${name}</h3><p>${city} • Completion: 0%</p>`;
+  card.innerHTML = `<h3>${projectName}</h3><p>${clientName} • Completion: 0%</p>`;
   projectList?.prepend(card);
+
+  projectModal?.close();
+  createProjectForm.reset();
+  percentAboveBelow.value = '';
+  constructionPeriod.value = '';
   updateStamp();
 });
 

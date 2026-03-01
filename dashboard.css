@@ -20,7 +20,7 @@ body {
 .dashboard-shell {
   max-width: 980px;
   margin: 0 auto;
-  padding: 14px 14px 24px;
+  padding: 14px 14px 86px;
 }
 
 .topbar {
@@ -197,6 +197,32 @@ body {
 .project-card h3 { margin: 0; font-size: 1.05rem; }
 .project-card p { margin: 8px 0 0; font-size: 0.85rem; color: var(--muted); }
 
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 8px 8px calc(10px + env(safe-area-inset-bottom));
+  background: #ffffff;
+  border-top: 1px solid #d1d5db;
+}
+
+.bottom-nav button {
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 4px 2px;
+}
+
+.bottom-nav span { font-size: 1.08rem; line-height: 1; }
+.bottom-nav small { font-size: 0.68rem; font-weight: 600; }
+
 .side-menu {
   position: fixed;
   top: 0;
@@ -241,3 +267,63 @@ body {
 }
 
 .side-menu-list .logout-item { margin-top: 8px; color: #b91c1c; font-weight: 600; }
+
+.project-modal {
+  width: min(92vw, 460px);
+  border: none;
+  border-radius: 14px;
+  padding: 0;
+}
+
+.project-modal::backdrop {
+  background: rgba(2, 6, 23, 0.5);
+}
+
+.project-form {
+  padding: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-head h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.modal-head button {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+}
+
+.project-form label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.project-form input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font: inherit;
+}
+
+.save-project {
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+  background: linear-gradient(120deg, var(--brand-secondary), var(--brand-primary));
+}
