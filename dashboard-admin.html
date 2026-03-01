@@ -34,7 +34,7 @@
         <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu">☰</button>
         <div class="title-wrap">
           <p class="eyebrow">Atmagaurav Infra Pvt Ltd</p>
-          <h1>Admin</h1>
+          <h1>Admin Dashboard</h1>
         </div>
         <div class="top-icons" aria-hidden="true">
           <span>🔔</span>
@@ -42,32 +42,39 @@
         </div>
       </header>
 
+      <p class="updated-stamp" id="updated-stamp">Updated just now</p>
+
       <section class="summary-grid" aria-label="Admin KPI cards">
         <article class="summary-card">
           <h2>APPROVALS</h2>
-          <p class="sub-kpi">PENDING</p>
-          <p class="value" id="kpi-approvals">6</p>
+          <p class="sub-kpi">PENDING ↗</p>
+          <p class="value" id="kpi-approvals">0</p>
         </article>
         <article class="summary-card">
           <h2>MATERIAL</h2>
-          <p class="sub-kpi">PENDING</p>
-          <p class="value" id="kpi-material">14</p>
+          <p class="sub-kpi">PENDING ↗</p>
+          <p class="value" id="kpi-material">0</p>
         </article>
         <article class="summary-card">
           <h2>TO DO</h2>
-          <p class="sub-kpi">PENDING</p>
-          <p class="value" id="kpi-todo">9</p>
+          <p class="sub-kpi">PENDING ↗</p>
+          <p class="value" id="kpi-todo">0</p>
         </article>
       </section>
 
       <section>
-        <div class="section-head">
-          <h2 class="section-title">Projects</h2>
+        <div class="projects-toolbar">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" type="button">All ▾</button>
+            <button class="toolbar-btn" type="button" id="search-toggle">🔎</button>
+          </div>
           <button id="add-project" type="button" class="add-project">+ Project</button>
         </div>
 
-        <label for="project-search" class="search-label">Search Project</label>
-        <input id="project-search" class="project-search" type="search" placeholder="Search by project name or city" />
+        <div class="search-wrap" id="search-wrap">
+          <label for="project-search" class="search-label">Search Project</label>
+          <input id="project-search" class="project-search" type="search" placeholder="Search by project name or city" />
+        </div>
 
         <div class="project-list" id="project-list">
           <a class="project-card" href="project-dashboard.html?project=Riverfront+Bridge+Package+A">

@@ -5,6 +5,9 @@ const menuBackdrop = document.getElementById('menu-backdrop');
 const searchInput = document.getElementById('project-search');
 const addProjectButton = document.getElementById('add-project');
 const projectList = document.getElementById('project-list');
+const updatedStamp = document.getElementById('updated-stamp');
+const searchToggle = document.getElementById('search-toggle');
+const searchWrap = document.getElementById('search-wrap');
 
 const openMenu = () => {
   sideMenu?.classList.add('open');
@@ -20,9 +23,17 @@ const hideMenu = () => {
   menuToggle?.setAttribute('aria-expanded', 'false');
 };
 
+const updateStamp = () => {
+  const now = new Date();
+  updatedStamp.textContent = `Updated: ${now.toLocaleDateString('en-IN')} ${now.toLocaleTimeString('en-IN')}`;
+};
+
 menuToggle?.addEventListener('click', openMenu);
 closeMenu?.addEventListener('click', hideMenu);
 menuBackdrop?.addEventListener('click', hideMenu);
+searchToggle?.addEventListener('click', () => {
+  searchWrap.hidden = !searchWrap.hidden;
+});
 
 searchInput?.addEventListener('input', () => {
   const query = searchInput.value.trim().toLowerCase();
@@ -46,3 +57,5 @@ addProjectButton?.addEventListener('click', () => {
   card.innerHTML = `<h3>${name}</h3><p>${city} • Completion: 0%</p>`;
   projectList?.prepend(card);
 });
+
+updateStamp();
