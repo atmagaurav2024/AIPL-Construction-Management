@@ -53,7 +53,7 @@ const calculatePercent = () => {
     return;
   }
 
-  const pct = (1 - ((cost - contract) / cost)) * 100;
+  const pct = (1 - (contract / cost)) * 100;
   const relation = pct > 100 ? 'Above' : pct < 100 ? 'Below' : 'At Par';
   percentAboveBelow.value = `${pct.toFixed(2)}% (${relation})`;
 };
