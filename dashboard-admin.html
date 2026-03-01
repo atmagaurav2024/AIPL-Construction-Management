@@ -44,22 +44,47 @@
 
       <p class="updated-stamp" id="updated-stamp">Updated just now</p>
 
-      <section class="summary-grid" aria-label="Admin KPI cards">
-        <article class="summary-card">
-          <h2>APPROVALS</h2>
-          <p class="sub-kpi">PENDING ↗</p>
-          <p class="value" id="kpi-approvals">0</p>
-        </article>
-        <article class="summary-card">
-          <h2>MATERIAL</h2>
-          <p class="sub-kpi">PENDING ↗</p>
-          <p class="value" id="kpi-material">0</p>
-        </article>
-        <article class="summary-card">
-          <h2>TO DO</h2>
-          <p class="sub-kpi">PENDING ↗</p>
-          <p class="value" id="kpi-todo">0</p>
-        </article>
+      <section aria-label="Admin KPI cards">
+        <div class="kpi-header">
+          <h2>KPI</h2>
+          <button id="add-kpi" class="add-kpi" type="button">+ Add KPI</button>
+        </div>
+
+        <div class="summary-grid" id="summary-grid">
+          <article class="summary-card">
+            <div class="kpi-top-row">
+              <h3>APPROVALS</h3>
+              <div class="kpi-actions">
+                <button class="kpi-edit" type="button">✎</button>
+                <button class="kpi-delete" type="button">🗑</button>
+              </div>
+            </div>
+            <p class="sub-kpi">PENDING ↗</p>
+            <p class="value">0</p>
+          </article>
+          <article class="summary-card">
+            <div class="kpi-top-row">
+              <h3>MATERIAL</h3>
+              <div class="kpi-actions">
+                <button class="kpi-edit" type="button">✎</button>
+                <button class="kpi-delete" type="button">🗑</button>
+              </div>
+            </div>
+            <p class="sub-kpi">PENDING ↗</p>
+            <p class="value">0</p>
+          </article>
+          <article class="summary-card">
+            <div class="kpi-top-row">
+              <h3>TO DO</h3>
+              <div class="kpi-actions">
+                <button class="kpi-edit" type="button">✎</button>
+                <button class="kpi-delete" type="button">🗑</button>
+              </div>
+            </div>
+            <p class="sub-kpi">PENDING ↗</p>
+            <p class="value">0</p>
+          </article>
+        </div>
       </section>
 
       <section>
