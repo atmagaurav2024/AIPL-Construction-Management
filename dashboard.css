@@ -20,7 +20,7 @@ body {
 .dashboard-shell {
   max-width: 980px;
   margin: 0 auto;
-  padding: 18px 14px 92px;
+  padding: 18px 14px 24px;
 }
 
 .topbar {
@@ -160,31 +160,6 @@ body {
   font-weight: 600;
 }
 
-.bottom-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 8px 8px calc(10px + env(safe-area-inset-bottom));
-  background: #111827;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.tab-btn {
-  border: none;
-  background: transparent;
-  color: #9ca3af;
-  display: grid;
-  justify-items: center;
-  gap: 2px;
-  padding: 4px 2px;
-}
-
-.tab-icon { font-size: 1.08rem; line-height: 1; }
-.tab-label { font-size: 0.68rem; font-weight: 600; }
-.tab-btn.active { color: #22c55e; }
 
 @media (min-width: 700px) {
   .summary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
