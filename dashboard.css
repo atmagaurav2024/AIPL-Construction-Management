@@ -88,7 +88,15 @@ body {
 }
 
 .custom-period-fields {
-  display: contents;
+  display: grid;
+  grid-column: 2 / span 2;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 6px;
+  align-items: end;
+}
+
+.custom-period-fields[hidden] {
+  display: none !important;
 }
 
 .custom-period-fields input {
@@ -97,6 +105,12 @@ body {
   padding: 7px;
   font: inherit;
   font-size: 0.84rem;
+}
+
+.custom-period-fields #apply-custom-period {
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
 }
 
 .period-note {

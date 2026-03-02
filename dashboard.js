@@ -16,6 +16,7 @@ const kpiPeriodSelect = document.getElementById('kpi-period');
 const customPeriodFields = document.getElementById('custom-period-fields');
 const customPeriodStart = document.getElementById('custom-period-start');
 const customPeriodEnd = document.getElementById('custom-period-end');
+const applyCustomPeriod = document.getElementById('apply-custom-period');
 const periodNote = document.getElementById('period-note');
 const menuProjects = document.getElementById('menu-projects');
 const menuEmployees = document.getElementById('menu-employees');
@@ -157,7 +158,7 @@ const updatePeriodNote = () => {
       updateStamp();
       return;
     }
-    if (periodNote) periodNote.textContent = 'KPI period: Custom Period (select From and To)';
+    if (periodNote) periodNote.textContent = 'KPI period: Custom Period (select From/To and tap Apply)';
     return;
   }
 
@@ -273,12 +274,17 @@ kpiPeriodSelect?.addEventListener('change', () => {
   updatePeriodNote();
 });
 
-customPeriodStart?.addEventListener('change', updatePeriodNote);
-customPeriodEnd?.addEventListener('change', () => {
+applyCustomPeriod?.addEventListener('click', () => {
+  if (!customPeriodStart?.value || !customPeriodEnd?.value) {
+    window.alert('Please select From and To dates for custom period.');
+    return;
+  }
+
   if (customPeriodStart?.value && customPeriodEnd?.value && new Date(customPeriodStart.value) > new Date(customPeriodEnd.value)) {
     window.alert('From date cannot be greater than To date.');
     return;
   }
+
   updatePeriodNote();
 });
 
