@@ -383,5 +383,12 @@ employeeForm?.addEventListener('submit', (event) => {
 refreshEmployeeProjectOptions();
 renderEmployees();
 showAdminHome();
+if (kpiPeriodSelect) {
+  if (kpiPeriodSelect.value !== 'custom') {
+    customPeriodFields?.setAttribute('hidden', '');
+    if (customPeriodStart) customPeriodStart.value = '';
+    if (customPeriodEnd) customPeriodEnd.value = '';
+  }
+}
 updatePeriodNote();
 updateStamp();
