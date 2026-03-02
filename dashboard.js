@@ -16,7 +16,6 @@ const kpiPeriodSelect = document.getElementById('kpi-period');
 const customPeriodFields = document.getElementById('custom-period-fields');
 const customPeriodStart = document.getElementById('custom-period-start');
 const customPeriodEnd = document.getElementById('custom-period-end');
-const applyCustomPeriod = document.getElementById('apply-custom-period');
 const periodNote = document.getElementById('period-note');
 const menuProjects = document.getElementById('menu-projects');
 const menuEmployees = document.getElementById('menu-employees');
@@ -150,15 +149,19 @@ const updatePeriodNote = () => {
     const from = customPeriodStart?.value;
     const to = customPeriodEnd?.value;
     if (from && to) {
-      periodNote.textContent = `Showing KPI for: ${label} (${from} to ${to})`;
+      if (new Date(from) > new Date(to)) {
+        if (periodNote) periodNote.textContent = 'KPI period: Custom Period (invalid range)';
+        return;
+      }
+      if (periodNote) periodNote.textContent = `KPI period: ${label} (${from} to ${to})`;
       updateStamp();
       return;
     }
-    periodNote.textContent = 'Showing KPI for: Custom Period (select dates and tap Apply)';
+    if (periodNote) periodNote.textContent = 'KPI period: Custom Period (select From and To)';
     return;
   }
 
-  periodNote.textContent = `Showing KPI for: ${label}`;
+  if (periodNote) periodNote.textContent = `KPI period: ${label}`;
   updateStamp();
 };
 
@@ -264,21 +267,18 @@ kpiPeriodSelect?.addEventListener('change', () => {
     customPeriodFields?.removeAttribute('hidden');
   } else {
     customPeriodFields?.setAttribute('hidden', '');
+    if (customPeriodStart) customPeriodStart.value = '';
+    if (customPeriodEnd) customPeriodEnd.value = '';
   }
   updatePeriodNote();
 });
 
-applyCustomPeriod?.addEventListener('click', () => {
-  if (!customPeriodStart?.value || !customPeriodEnd?.value) {
-    window.alert('Please select From and To dates for custom period.');
-    return;
-  }
-
-  if (new Date(customPeriodStart.value) > new Date(customPeriodEnd.value)) {
+customPeriodStart?.addEventListener('change', updatePeriodNote);
+customPeriodEnd?.addEventListener('change', () => {
+  if (customPeriodStart?.value && customPeriodEnd?.value && new Date(customPeriodStart.value) > new Date(customPeriodEnd.value)) {
     window.alert('From date cannot be greater than To date.');
     return;
   }
-
   updatePeriodNote();
 });
 

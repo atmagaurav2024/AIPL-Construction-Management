@@ -47,22 +47,25 @@
         <p class="updated-stamp" id="updated-stamp">Updated just now</p>
 
         <section class="period-filter" aria-label="KPI period selector">
-          <label for="kpi-period" class="period-label">Select Period</label>
-          <select id="kpi-period" class="period-select">
-            <option value="this-month">This Month</option>
-            <option value="this-year">This Year</option>
-            <option value="current-financial-year">Current Financial Year</option>
-            <option value="till-date">Till Date</option>
-            <option value="custom">Custom Period</option>
-          </select>
+          <div class="period-inline-row">
+            <label class="period-cell">
+              Select Period
+              <select id="kpi-period" class="period-select">
+                <option value="this-month">This Month</option>
+                <option value="this-year">This Year</option>
+                <option value="current-financial-year">Current Financial Year</option>
+                <option value="till-date">Till Date</option>
+                <option value="custom">Custom Period</option>
+              </select>
+            </label>
 
-          <div id="custom-period-fields" class="custom-period-fields" hidden>
-            <label>From <input id="custom-period-start" type="date" /></label>
-            <label>To <input id="custom-period-end" type="date" /></label>
-            <button id="apply-custom-period" type="button" class="toolbar-btn">Apply</button>
+            <div id="custom-period-fields" class="custom-period-fields" hidden>
+              <label class="period-cell">From <input id="custom-period-start" type="date" /></label>
+              <label class="period-cell">To <input id="custom-period-end" type="date" /></label>
+            </div>
           </div>
 
-          <p id="period-note" class="period-note">Showing KPI for: This Month</p>
+          <p id="period-note" class="period-note">KPI period: This Month</p>
         </section>
 
         <section aria-label="Admin KPI cards">
