@@ -1,3 +1,5 @@
+const EMPLOYEE_KEY = 'aipl_employees';
+
 const menuToggle = document.getElementById('menu-toggle');
 const closeMenu = document.getElementById('close-menu');
 const sideMenu = document.getElementById('side-menu');
@@ -11,7 +13,9 @@ const searchWrap = document.getElementById('search-wrap');
 const addKpiButton = document.getElementById('add-kpi');
 const summaryGrid = document.getElementById('summary-grid');
 const menuProjects = document.getElementById('menu-projects');
+const menuEmployees = document.getElementById('menu-employees');
 const projectsSection = document.getElementById('projects-section');
+const employeesSection = document.getElementById('employees-section');
 
 const projectModal = document.getElementById('project-modal');
 const closeProjectModal = document.getElementById('close-project-modal');
@@ -24,6 +28,13 @@ const percentAboveBelow = document.getElementById('percent-above-below');
 const workOrderDate = document.getElementById('work-order-date');
 const scheduleDate = document.getElementById('schedule-date');
 const constructionPeriod = document.getElementById('construction-period');
+
+const employeeModal = document.getElementById('employee-modal');
+const addEmployeeButton = document.getElementById('add-employee');
+const closeEmployeeModal = document.getElementById('close-employee-modal');
+const employeeForm = document.getElementById('employee-form');
+const employeeList = document.getElementById('employee-list');
+const employeeProject = document.getElementById('emp-project');
 
 const openMenu = () => {
   sideMenu?.classList.add('open');
@@ -42,6 +53,53 @@ const hideMenu = () => {
 const updateStamp = () => {
   const now = new Date();
   updatedStamp.textContent = `Updated: ${now.toLocaleDateString('en-IN')} ${now.toLocaleTimeString('en-IN')}`;
+};
+
+const getEmployees = () => {
+  try {
+    return JSON.parse(localStorage.getItem(EMPLOYEE_KEY) || '[]');
+  } catch {
+    return [];
+  }
+};
+
+const setEmployees = (employees) => {
+  localStorage.setItem(EMPLOYEE_KEY, JSON.stringify(employees));
+};
+
+const getProjectsFromUI = () =>
+  [...(projectList?.querySelectorAll('.project-card h3') || [])].map((el) => el.textContent.trim()).filter(Boolean);
+
+const refreshEmployeeProjectOptions = () => {
+  const projects = getProjectsFromUI();
+  employeeProject.innerHTML = '<option value="">Select Project</option>';
+  projects.forEach((project) => {
+    const opt = document.createElement('option');
+    opt.value = project;
+    opt.textContent = project;
+    employeeProject.append(opt);
+  });
+};
+
+const renderEmployees = () => {
+  const employees = getEmployees();
+  if (!employees.length) {
+    employeeList.innerHTML = '<p class="empty-state">No employees enrolled yet.</p>';
+    return;
+  }
+
+  employeeList.innerHTML = '';
+  employees.forEach((emp) => {
+    const card = document.createElement('article');
+    card.className = 'employee-card';
+    card.innerHTML = `
+      <h4>${emp.name}</h4>
+      <p>Mobile: ${emp.mobile}</p>
+      <p>Project Access: ${emp.assignedProject || 'Not assigned'}</p>
+      <p>Password: ${emp.password}</p>
+    `;
+    employeeList.append(card);
+  });
 };
 
 const calculatePercent = () => {
@@ -133,9 +191,14 @@ menuBackdrop?.addEventListener('click', hideMenu);
 
 menuProjects?.addEventListener('click', (event) => {
   event.preventDefault();
-  projectsSection?.removeAttribute('hidden');
-  hideMenu();
   projectsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  hideMenu();
+});
+
+menuEmployees?.addEventListener('click', (event) => {
+  event.preventDefault();
+  employeesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  hideMenu();
 });
 
 searchToggle?.addEventListener('click', () => {
@@ -181,7 +244,59 @@ createProjectForm?.addEventListener('submit', (event) => {
   createProjectForm.reset();
   percentAboveBelow.value = '';
   constructionPeriod.value = '';
+  refreshEmployeeProjectOptions();
   updateStamp();
 });
 
+addEmployeeButton?.addEventListener('click', () => {
+  refreshEmployeeProjectOptions();
+  employeeModal?.showModal();
+});
+
+closeEmployeeModal?.addEventListener('click', () => {
+  employeeModal?.close();
+});
+
+employeeForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const payload = {
+    name: document.getElementById('emp-name')?.value.trim(),
+    mobile: document.getElementById('emp-mobile')?.value.trim(),
+    email: document.getElementById('emp-email')?.value.trim(),
+    dob: document.getElementById('emp-dob')?.value,
+    salary: document.getElementById('emp-salary')?.value,
+    address: document.getElementById('emp-address')?.value.trim(),
+    aadhar: document.getElementById('emp-aadhar')?.value.trim(),
+    pan: document.getElementById('emp-pan')?.value.trim(),
+    bank: document.getElementById('emp-bank')?.value.trim(),
+    account: document.getElementById('emp-account')?.value.trim(),
+    ifsc: document.getElementById('emp-ifsc')?.value.trim(),
+    assignedProject: employeeProject?.value,
+  };
+
+  if (!payload.name || !/^\d{10}$/.test(payload.mobile) || !payload.assignedProject) {
+    window.alert('Please fill employee details with valid mobile and project assignment.');
+    return;
+  }
+
+  const employees = getEmployees();
+  if (employees.some((item) => item.mobile === payload.mobile)) {
+    window.alert('Employee with this mobile already exists.');
+    return;
+  }
+
+  payload.password = payload.mobile.slice(-4);
+  employees.push(payload);
+  setEmployees(employees);
+  renderEmployees();
+
+  employeeModal?.close();
+  employeeForm.reset();
+  updateStamp();
+  window.alert(`Employee created. Login password is ${payload.password}`);
+});
+
+refreshEmployeeProjectOptions();
+renderEmployees();
 updateStamp();

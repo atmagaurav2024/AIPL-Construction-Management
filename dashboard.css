@@ -327,3 +327,42 @@ body {
   padding: 10px;
   background: linear-gradient(120deg, var(--brand-secondary), var(--brand-primary));
 }
+
+
+.section-head-row {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-head-title {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.employee-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.employee-card {
+  background: var(--card);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.employee-card h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.employee-card p {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.empty-state { margin: 0; color: var(--muted); font-size: 0.8rem; }

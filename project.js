@@ -1,3 +1,11 @@
+const currentUser = (() => {
+  try {
+    return JSON.parse(localStorage.getItem('aipl_current_user') || '{}');
+  } catch {
+    return {};
+  }
+})();
+
 const nameEl = document.getElementById('project-name');
 const timeEl = document.getElementById('live-time');
 const dateEl = document.getElementById('live-date');
@@ -9,6 +17,12 @@ let punchedIn = false;
 
 const params = new URLSearchParams(window.location.search);
 const projectName = params.get('project') || 'Project Dashboard';
+
+if (currentUser.role === 'employee' && currentUser.assignedProject && currentUser.assignedProject !== projectName) {
+  window.alert('You can access only your assigned project.');
+  window.location.href = `project-dashboard.html?project=${encodeURIComponent(currentUser.assignedProject)}`;
+}
+
 nameEl.textContent = projectName;
 
 autoClock();

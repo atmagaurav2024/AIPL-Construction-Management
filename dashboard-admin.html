@@ -20,6 +20,7 @@
       </div>
       <nav class="side-menu-list">
         <a href="#" id="menu-projects">Projects</a>
+        <a href="#" id="menu-employees">Employees</a>
         <a href="#">Subcontractor</a>
         <a href="#">Vendors</a>
         <a href="#">Material</a>
@@ -87,6 +88,15 @@
         </div>
       </section>
 
+
+      <section id="employees-section">
+        <div class="section-head-row">
+          <h2 class="section-head-title">Employees</h2>
+          <button id="add-employee" class="add-project" type="button">+ Employee</button>
+        </div>
+        <div class="employee-list" id="employee-list"></div>
+      </section>
+
       <section id="projects-section">
         <div class="projects-toolbar">
           <div class="toolbar-left">
@@ -148,6 +158,35 @@
         </label>
 
         <button class="save-project" type="submit">Save Project</button>
+      </form>
+    </dialog>
+
+
+    <dialog id="employee-modal" class="project-modal">
+      <form id="employee-form" class="project-form" method="dialog">
+        <div class="modal-head">
+          <h2>Employee Enrolment</h2>
+          <button type="button" id="close-employee-modal">✕</button>
+        </div>
+
+        <label>Name of Employee <input id="emp-name" required /></label>
+        <label>Mobile Number <input id="emp-mobile" type="tel" maxlength="10" pattern="[0-9]{10}" required /></label>
+        <label>Email ID <input id="emp-email" type="email" required /></label>
+        <label>DOB <input id="emp-dob" type="date" required /></label>
+        <label>Salary <input id="emp-salary" type="number" min="0" step="0.01" required /></label>
+        <label>Address <input id="emp-address" required /></label>
+        <label>Aadhar Number <input id="emp-aadhar" required /></label>
+        <label>PAN Number <input id="emp-pan" required /></label>
+        <label>Bank Name <input id="emp-bank" required /></label>
+        <label>Account Number <input id="emp-account" required /></label>
+        <label>IFSC <input id="emp-ifsc" required /></label>
+        <label>Assign Project
+          <select id="emp-project" required>
+            <option value="">Select Project</option>
+          </select>
+        </label>
+
+        <button class="save-project" type="submit">Save Employee</button>
       </form>
     </dialog>
 
