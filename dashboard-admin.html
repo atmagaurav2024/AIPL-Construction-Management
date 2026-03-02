@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Atmagaurav Infra Pvt Ltd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <aside id="side-menu" class="side-menu" aria-hidden="true">
+      <div class="side-menu-header">
+        <h2>Menu</h2>
+        <button id="close-menu" type="button">✕</button>
+      </div>
+      <nav class="side-menu-list">
+        <a href="#" id="menu-projects">Projects</a>
+        <a href="#" id="menu-employees">Employees</a>
+        <a href="#">Subcontractor</a>
+        <a href="#">Vendors</a>
+        <a href="#">Material</a>
+        <a href="#">Reports</a>
+        <a class="logout-item" href="index.html">Logout</a>
+      </nav>
+    </aside>
+    <div id="menu-backdrop" class="menu-backdrop" hidden></div>
+
+    <main class="dashboard-shell">
+      <header class="topbar">
+        <button id="menu-toggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu">☰</button>
+        <div class="title-wrap">
+          <p class="eyebrow">Atmagaurav Infra Pvt Ltd</p>
+          <h1>Admin Dashboard</h1>
+        </div>
+        <div class="top-icons" aria-hidden="true">
+          <span>🔔</span>
+          <span>🖥️</span>
+        </div>
+      </header>
+
+      <p class="updated-stamp" id="updated-stamp">Updated just now</p>
+
+      <section aria-label="Admin KPI cards">
+        <div class="kpi-header">
+          <h2>KPI</h2>
+          <button id="add-kpi" class="add-kpi" type="button">+ Add KPI</button>
+        </div>
+
+        <div class="summary-grid" id="summary-grid">
+          <article class="summary-card">
+            <div class="kpi-top-row">
+              <h3>APPROVALS</h3>
+              <div class="kpi-actions">
+                <button class="kpi-edit" type="button">✎</button>
+                <button class="kpi-delete" type="button">🗑</button>
+              </div>
+            </div>
+            <p class="sub-kpi">PENDING ↗</p>
+            <p class="value">0</p>
+          </article>
+          <article class="summary-card">
+            <div class="kpi-top-row">
+              <h3>MATERIAL</h3>
+              <div class="kpi-actions">
+                <button class="kpi-edit" type="button">✎</button>
+                <button class="kpi-delete" type="button">🗑</button>
+              </div>
+            </div>
+            <p class="sub-kpi">PENDING ↗</p>
+            <p class="value">0</p>
+          </article>
+          <article class="summary-card">
+            <div class="kpi-top-row">
+              <h3>TO DO</h3>
+              <div class="kpi-actions">
+                <button class="kpi-edit" type="button">✎</button>
+                <button class="kpi-delete" type="button">🗑</button>
+              </div>
+            </div>
+            <p class="sub-kpi">PENDING ↗</p>
+            <p class="value">0</p>
+          </article>
+        </div>
+      </section>
+
+
+      <section id="employees-section">
+        <div class="section-head-row">
+          <h2 class="section-head-title">Employees</h2>
+          <button id="add-employee" class="add-project" type="button">+ Employee</button>
+        </div>
+        <div class="employee-list" id="employee-list"></div>
+      </section>
+
+      <section id="projects-section">
+        <div class="projects-toolbar">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" type="button">All ▾</button>
+            <button class="toolbar-btn" type="button" id="search-toggle">🔎</button>
+          </div>
+          <button id="add-project" type="button" class="add-project">Create Project</button>
+        </div>
+
+        <div class="search-wrap" id="search-wrap">
+          <label for="project-search" class="search-label">Search Project</label>
+          <input id="project-search" class="project-search" type="search" placeholder="Search by project name or city" />
+        </div>
+
+        <div class="project-list" id="project-list">
+          <a class="project-card" href="project-dashboard.html?project=Riverfront+Bridge+Package+A">
+            <h3>Riverfront Bridge Package A</h3>
+            <p>Pune • Completion: 62%</p>
+          </a>
+          <a class="project-card" href="project-dashboard.html?project=National+Highway+Strengthening+Section+3">
+            <h3>National Highway Strengthening Section 3</h3>
+            <p>Nashik • Completion: 47%</p>
+          </a>
+          <a class="project-card" href="project-dashboard.html?project=Industrial+Shed+and+Utility+Block">
+            <h3>Industrial Shed and Utility Block</h3>
+            <p>Aurangabad • Completion: 71%</p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Quick actions">
+      <button type="button"><span>👷</span><small>Subcon</small></button>
+      <button type="button"><span>🏢</span><small>Vendors</small></button>
+      <button type="button"><span>🧱</span><small>Material</small></button>
+      <button type="button"><span>📊</span><small>Reports</small></button>
+    </nav>
+
+    <dialog id="project-modal" class="project-modal">
+      <form id="create-project-form" class="project-form" method="dialog">
+        <div class="modal-head">
+          <h2>Create Project</h2>
+          <button type="button" id="close-project-modal">✕</button>
+        </div>
+
+        <label>Project Name <input id="project-name-input" required /></label>
+        <label>Client Name <input id="client-name-input" required /></label>
+        <label>Cost Put to Tender <input id="cost-tender-input" type="number" min="0" step="0.01" required /></label>
+        <label>Contract Price <input id="contract-price-input" type="number" min="0" step="0.01" required /></label>
+        <label>% above / Below (auto)
+          <input id="percent-above-below" readonly placeholder="Auto calculated" />
+        </label>
+        <label>Work Order Date <input id="work-order-date" type="date" required /></label>
+        <label>Schedule Completion Date <input id="schedule-date" type="date" required /></label>
+        <label>EOT Date <input id="eot-date" type="date" /></label>
+        <label>DLP Date <input id="dlp-date" type="date" /></label>
+        <label>Construction Period (auto)
+          <input id="construction-period" readonly placeholder="Auto calculated" />
+        </label>
+
+        <button class="save-project" type="submit">Save Project</button>
+      </form>
+    </dialog>
+
+
+    <dialog id="employee-modal" class="project-modal">
+      <form id="employee-form" class="project-form" method="dialog">
+        <div class="modal-head">
+          <h2>Employee Enrolment</h2>
+          <button type="button" id="close-employee-modal">✕</button>
+        </div>
+
+        <label>Name of Employee <input id="emp-name" required /></label>
+        <label>Mobile Number <input id="emp-mobile" type="tel" maxlength="10" pattern="[0-9]{10}" required /></label>
+        <label>Email ID <input id="emp-email" type="email" required /></label>
+        <label>DOB <input id="emp-dob" type="date" required /></label>
+        <label>Salary <input id="emp-salary" type="number" min="0" step="0.01" required /></label>
+        <label>Address <input id="emp-address" required /></label>
+        <label>Aadhar Number <input id="emp-aadhar" required /></label>
+        <label>PAN Number <input id="emp-pan" required /></label>
+        <label>Bank Name <input id="emp-bank" required /></label>
+        <label>Account Number <input id="emp-account" required /></label>
+        <label>IFSC <input id="emp-ifsc" required /></label>
+        <label>Assign Project
+          <select id="emp-project" required>
+            <option value="">Select Project</option>
+          </select>
+        </label>
+
+        <button class="save-project" type="submit">Save Employee</button>
+      </form>
+    </dialog>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
