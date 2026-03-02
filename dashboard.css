@@ -55,6 +55,58 @@ body {
   font-size: 0.78rem;
 }
 
+.period-filter {
+  margin-top: 10px;
+  background: var(--card);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.period-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.period-select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 9px 10px;
+  font: inherit;
+  background: #fff;
+}
+
+.custom-period-fields {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.custom-period-fields label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.custom-period-fields input {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 8px;
+  font: inherit;
+}
+
+.period-note {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
 .kpi-header {
   margin-top: 10px;
   display: flex;
@@ -332,6 +384,8 @@ body {
 .section-head-row {
   margin-top: 14px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   justify-content: space-between;
   align-items: center;
 }
@@ -366,3 +420,14 @@ body {
 }
 
 .empty-state { margin: 0; color: var(--muted); font-size: 0.8rem; }
+
+
+.employees-page {
+  padding-bottom: 82px;
+}
+
+@media (max-width: 560px) {
+  .custom-period-fields {
+    grid-template-columns: 1fr;
+  }
+}

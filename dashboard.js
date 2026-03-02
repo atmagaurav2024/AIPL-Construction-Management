@@ -12,10 +12,18 @@ const searchToggle = document.getElementById('search-toggle');
 const searchWrap = document.getElementById('search-wrap');
 const addKpiButton = document.getElementById('add-kpi');
 const summaryGrid = document.getElementById('summary-grid');
+const kpiPeriodSelect = document.getElementById('kpi-period');
+const customPeriodFields = document.getElementById('custom-period-fields');
+const customPeriodStart = document.getElementById('custom-period-start');
+const customPeriodEnd = document.getElementById('custom-period-end');
+const applyCustomPeriod = document.getElementById('apply-custom-period');
+const periodNote = document.getElementById('period-note');
 const menuProjects = document.getElementById('menu-projects');
 const menuEmployees = document.getElementById('menu-employees');
+const adminHome = document.getElementById('admin-home');
 const projectsSection = document.getElementById('projects-section');
 const employeesSection = document.getElementById('employees-section');
+const backToDashboard = document.getElementById('back-to-dashboard');
 
 const projectModal = document.getElementById('project-modal');
 const closeProjectModal = document.getElementById('close-project-modal');
@@ -102,6 +110,16 @@ const renderEmployees = () => {
   });
 };
 
+const showAdminHome = () => {
+  adminHome?.removeAttribute('hidden');
+  employeesSection?.setAttribute('hidden', '');
+};
+
+const showEmployeesPage = () => {
+  adminHome?.setAttribute('hidden', '');
+  employeesSection?.removeAttribute('hidden');
+};
+
 const calculatePercent = () => {
   const cost = Number(costTenderInput?.value || 0);
   const contract = Number(contractPriceInput?.value || 0);
@@ -114,6 +132,34 @@ const calculatePercent = () => {
   const pct = (1 - (contract / cost)) * 100;
   const relation = pct > 100 ? 'Above' : pct < 100 ? 'Below' : 'At Par';
   percentAboveBelow.value = `${pct.toFixed(2)}% (${relation})`;
+};
+
+const periodLabelMap = {
+  'this-month': 'This Month',
+  'this-year': 'This Year',
+  'current-financial-year': 'Current Financial Year',
+  'till-date': 'Till Date',
+  custom: 'Custom Period',
+};
+
+const updatePeriodNote = () => {
+  const value = kpiPeriodSelect?.value || 'this-month';
+  const label = periodLabelMap[value] || 'This Month';
+
+  if (value === 'custom') {
+    const from = customPeriodStart?.value;
+    const to = customPeriodEnd?.value;
+    if (from && to) {
+      periodNote.textContent = `Showing KPI for: ${label} (${from} to ${to})`;
+      updateStamp();
+      return;
+    }
+    periodNote.textContent = 'Showing KPI for: Custom Period (select dates and tap Apply)';
+    return;
+  }
+
+  periodNote.textContent = `Showing KPI for: ${label}`;
+  updateStamp();
 };
 
 const calculateConstructionPeriod = () => {
@@ -191,18 +237,49 @@ menuBackdrop?.addEventListener('click', hideMenu);
 
 menuProjects?.addEventListener('click', (event) => {
   event.preventDefault();
+  showAdminHome();
   projectsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   hideMenu();
 });
 
 menuEmployees?.addEventListener('click', (event) => {
   event.preventDefault();
+  showEmployeesPage();
   employeesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   hideMenu();
 });
 
+backToDashboard?.addEventListener('click', () => {
+  showAdminHome();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 searchToggle?.addEventListener('click', () => {
   searchWrap.hidden = !searchWrap.hidden;
+});
+
+kpiPeriodSelect?.addEventListener('change', () => {
+  const isCustom = kpiPeriodSelect.value === 'custom';
+  if (isCustom) {
+    customPeriodFields?.removeAttribute('hidden');
+  } else {
+    customPeriodFields?.setAttribute('hidden', '');
+  }
+  updatePeriodNote();
+});
+
+applyCustomPeriod?.addEventListener('click', () => {
+  if (!customPeriodStart?.value || !customPeriodEnd?.value) {
+    window.alert('Please select From and To dates for custom period.');
+    return;
+  }
+
+  if (new Date(customPeriodStart.value) > new Date(customPeriodEnd.value)) {
+    window.alert('From date cannot be greater than To date.');
+    return;
+  }
+
+  updatePeriodNote();
 });
 
 searchInput?.addEventListener('input', () => {
@@ -299,4 +376,6 @@ employeeForm?.addEventListener('submit', (event) => {
 
 refreshEmployeeProjectOptions();
 renderEmployees();
+showAdminHome();
+updatePeriodNote();
 updateStamp();
